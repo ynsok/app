@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS AddressDb(
+    addressId INTEGER NOT NULL PRIMARY KEY,
+    homeNumber INTEGER NOT NULL,
+    city TEXT  NOT NULL,
+    street TEXT NOT NULL,
+    employeeId INTEGER NOT NULL,
+    FOREIGN KEY(employeeId) REFERENCES EmployeeDb (employeeId)
+);
+
+insertOrReplace:
+INSERT INTO
+    AddressDb(
+        homeNumber,
+        city,
+        street,
+        employeeId)
+VALUES(?,?,?,?);
+
+selectAllAddrressesByEmployeeId:
+SELECT * FROM AddressDb WHERE employeeId = ?;
+
+addressExists:
+SELECT EXISTS(SELECT 1 FROM AddressDb WHERE homeNumber = ? AND city = ? AND street = ?);
