@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS EmployeeDb(
+    employeeId INTEGER PRIMARY KEY AUTOINCREMENT,
+    firstName TEXT NOT NULL,
+    lastName TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    gender TEXT NOT NULL
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO EmployeeDb(
+    firstName,
+    lastName,
+    age,
+    gender
+)VALUES(?,?,?,?);
+
+selectAllEmployee:
+SELECT * FROM EmployeeDb;
