@@ -14,7 +14,13 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.16.0"
+}
+
 allprojects {
+    apply from: "$rootDir/ktlint.gradle"
+    apply from: "$rootDir/detekt.gradle"
     repositories {
         google()
         mavenCentral()
