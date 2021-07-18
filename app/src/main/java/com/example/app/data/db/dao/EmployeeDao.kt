@@ -16,7 +16,6 @@ class EmployeeDao(private val employeeQueries: EmployeeDbQueries) {
         .distinctUntilChanged()
         .map { it.toEntities() }
 
-
     fun insertOrReplaceEmployee(employee: EmployeeEntity) =
         with(employee) {
             employeeQueries.insertOrReplace(employeeId, firstName, lastName, age, gender)

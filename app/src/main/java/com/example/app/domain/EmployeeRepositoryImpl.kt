@@ -21,7 +21,6 @@ class EmployeeRepositoryImpl(private val employeeAddressConnector: EmployeeAddre
     override suspend fun deleteEmployee(employee: Employee): Result<Unit> =
         safeCall { employeeAddressConnector.deleteEmployee(employee.toEntities()) }
 
-
     override suspend fun deleteAddress(address: Address): Result<Unit> =
         safeCall { employeeAddressConnector.deleteAddress(address.toEntity()) }
 }

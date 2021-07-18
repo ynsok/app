@@ -6,11 +6,10 @@ import com.example.app.domain.useCase.GetAllEmployeeUseCase
 import com.example.app.domain.useCase.SaveEmployeeUseCase
 import org.koin.dsl.module
 
-
 val repositoryModule = module {
     single<EmployeeRepository> { EmployeeRepositoryImpl(employeeAddressConnector = get()) }
 }
-val useCases = module {
+val useCasesModule = module {
     factory { GetAllEmployeeUseCase(employeeRepository = get()) }
     factory { SaveEmployeeUseCase(employeeRepository = get()) }
 }

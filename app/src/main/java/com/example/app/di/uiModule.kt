@@ -4,6 +4,6 @@ import com.example.app.ui.EmployeeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModel = module {
+val viewModelModule = module {
     viewModel { EmployeeViewModel(getAllEmployeeUseCase = get(), saveEmployeeUseCase = get()) }
 }
