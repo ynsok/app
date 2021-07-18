@@ -6,19 +6,26 @@ import db.AddressDbQueries
 
 class AddressDao(private val addressDbQueries: AddressDbQueries) {
 
-    fun saveAddressWhenNotExists(addressEntity: AddressEntity) =
+    fun insertOrUpdateAddress(addressEntity: AddressEntity) =
         if (addressExist(addressEntity).not()) {
-            insertOrReplace(addressEntity)
-        } else Unit
+            insertAddress(addressEntity)
+        } else updateAddress(addressEntity)
 
-    private fun addressExist(addressEntity: AddressEntity) = with(addressEntity) {
-        addressDbQueries.addressExists(homeNumber, city, street).executeAsOne()
+    private fun updateAddress(addressEntity: AddressEntity) = with(addressEntity) {
+        addressDbQueries.updateAddress(homeNumber, city, street, addressId, employeeId)
     }
 
-    private fun insertOrReplace(addressEntity: AddressEntity) = with(addressEntity) {
-        addressDbQueries.insertOrReplace(homeNumber, city, street, employeeId)
+    private fun addressExist(addressEntity: AddressEntity) = with(addressEntity) {
+        addressDbQueries.addressExists(homeNumber, city, street, employeeId).executeAsOne()
+    }
+
+    private fun insertAddress(addressEntity: AddressEntity) = with(addressEntity) {
+        addressDbQueries.insertAddress(homeNumber, city, street, employeeId)
     }
 
     fun selectAllAddressesByEmployeeId(employeeId: Long) =
         addressDbQueries.selectAllAddrressesByEmployeeId(employeeId).executeAsList().toEntities()
+
+    fun deleteAddress(addressEntity: AddressEntity) =
+        addressDbQueries.deleteAddress(addressEntity.addressId)
 }

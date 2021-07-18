@@ -21,4 +21,7 @@ class EmployeeDao(private val employeeQueries: EmployeeDbQueries) {
         with(employee) {
             employeeQueries.insertOrReplace(employeeId, firstName, lastName, age, gender)
         }
+
+    fun deleteEmployee(employee: EmployeeEntity) =
+        employeeQueries.deleteEmployee(employee.employeeId)
 }

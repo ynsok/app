@@ -1,5 +1,6 @@
 package com.example.app.data.db.dao
 
+import com.example.app.data.db.entity.AddressEntity
 import com.example.app.data.db.entity.EmployeeEntity
 import kotlinx.coroutines.flow.map
 
@@ -12,7 +13,7 @@ class EmployeeAddressConnector(
         employeeDao.insertOrReplaceEmployee(employee)
 
         employee.addressEntity?.forEach {
-            addressDao.saveAddressWhenNotExists(it)
+            addressDao.insertOrUpdateAddress(it)
         }
     }
 
@@ -23,4 +24,8 @@ class EmployeeAddressConnector(
                 employee.copy(addressEntity = addresses)
             }
         }
+
+    fun deleteEmployee(employee: EmployeeEntity) = employeeDao.deleteEmployee(employee)
+
+    fun deleteAddress(addressEntity: AddressEntity) = addressDao.deleteAddress(addressEntity)
 }

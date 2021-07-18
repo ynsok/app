@@ -19,3 +19,6 @@ INSERT OR REPLACE INTO EmployeeDb(
 
 selectAllEmployee:
 SELECT * FROM EmployeeDb;
+
+deleteEmployee:
+DELETE FROM EmployeeDb WHERE employeeId = ?;

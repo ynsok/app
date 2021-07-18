@@ -3,15 +3,16 @@ package com.example.app.ui.entity
 import com.example.app.domain.entity.Address
 
 data class AddressItem(
+    val addressId: Long = 0,
     val employeeId: Long,
     val homeNumber: Long,
     val city: String,
     val street: String
 )
 
-fun Address.toItem() = AddressItem(employeeId, homeNumber, city, street)
+fun Address.toItem() = AddressItem(addressId, employeeId, homeNumber, city, street)
 
-fun AddressItem.toDomain() = Address(employeeId, homeNumber, city, street)
+fun AddressItem.toDomain() = Address(addressId, employeeId, homeNumber, city, street)
 
 fun List<Address>.toItems() = map { it.toItem() }
 
