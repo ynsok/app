@@ -5,11 +5,11 @@ import com.example.app.domain.entity.Gender
 
 data class EmployeeItem(
     val employeeId: Long = 0,
-    val firstName: String,
-    val lastName: String,
-    val age: Long,
-    val gender: Gender,
-    val addressItem: List<AddressItem>
+    val firstName: String = "",
+    val lastName: String = "",
+    val age: Long = 0,
+    val gender: Gender = Gender.FEMALE,
+    val addressItem: List<AddressItem> = emptyList()
 )
 
 fun Employee.toItem() =

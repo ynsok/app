@@ -19,6 +19,9 @@ VALUES(?,?,?,?);
 selectAllAddrressesByEmployeeId:
 SELECT * FROM AddressDb WHERE employeeId = ?;
 
+selectAllAddrresses:
+SELECT * FROM AddressDb;
+
 addressExists:
 SELECT EXISTS(SELECT 1 FROM AddressDb WHERE homeNumber = ? AND city = ? AND street = ? AND employeeId = ?);
 

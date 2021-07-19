@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 interface EmployeeRepository {
     suspend fun getAllEmployee(): Flow<List<Employee>>
     suspend fun saveEmployee(employee: Employee): Result<Unit>
+    suspend fun saveEmployeeAddress(address: Address): Result<Unit>
     suspend fun deleteEmployee(employee: Employee): Result<Unit>
     suspend fun deleteAddress(address: Address): Result<Unit>
+    suspend fun updateEmployeeAddress(address: Address): Result<Unit>
 }

@@ -4,10 +4,10 @@ import com.example.app.domain.entity.Address
 
 data class AddressItem(
     val addressId: Long = 0,
-    val employeeId: Long,
-    val homeNumber: Long,
-    val city: String,
-    val street: String
+    val employeeId: Long = 0,
+    val homeNumber: Long = 0,
+    val city: String = "",
+    val street: String = ""
 )
 
 fun Address.toItem() = AddressItem(addressId, employeeId, homeNumber, city, street)

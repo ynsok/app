@@ -2,28 +2,30 @@ package com.example.app.data.db.dao
 
 import com.example.app.data.db.entity.AddressEntity
 import com.example.app.data.db.entity.EmployeeEntity
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 
 class EmployeeAddressConnector(
     private val employeeDao: EmployeeDao,
     private val addressDao: AddressDao
 ) {
-
-    fun insertOrReplace(employee: EmployeeEntity) {
+    fun saveEmployee(employee: EmployeeEntity) =
         employeeDao.insertOrReplaceEmployee(employee)
 
-        employee.addressEntity?.forEach {
-            addressDao.insertOrUpdateAddress(it)
-        }
-    }
+    fun saveEmployeeAddress(addressEntity: AddressEntity) = addressDao.insertOrUpdateAddress(addressEntity)
 
-    fun selectAllEmployee() =
-        employeeDao.getAllEmployees().map { list ->
-            list.map { employee ->
+    fun updateAddress(addressEntity: AddressEntity) = addressDao.updateAddress(addressEntity)
+
+    fun employeeFlow(): Flow<List<EmployeeEntity>> {
+        val employeeFlow = employeeDao.getAllEmployees()
+        val addressesFlow = addressDao.getAllAddresses()
+        return employeeFlow.combine(addressesFlow) { employees, _ ->
+            employees.map { employee ->
                 val addresses = addressDao.selectAllAddressesByEmployeeId(employee.employeeId)
                 employee.copy(addressEntity = addresses)
             }
         }
+    }
 
     fun deleteEmployee(employee: EmployeeEntity) = employeeDao.deleteEmployee(employee)
 

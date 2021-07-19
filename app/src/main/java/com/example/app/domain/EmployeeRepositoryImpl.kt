@@ -13,14 +13,20 @@ import kotlinx.coroutines.flow.map
 class EmployeeRepositoryImpl(private val employeeAddressConnector: EmployeeAddressConnector) :
     EmployeeRepository {
     override suspend fun getAllEmployee(): Flow<List<Employee>> =
-        employeeAddressConnector.selectAllEmployee().map { it.toDomains() }
+        employeeAddressConnector.employeeFlow().map { it.toDomains() }
 
     override suspend fun saveEmployee(employee: Employee): Result<Unit> =
-        safeCall { employeeAddressConnector.insertOrReplace(employee.toEntities()) }
+        safeCall { employeeAddressConnector.saveEmployee(employee.toEntities()) }
+
+    override suspend fun saveEmployeeAddress(address: Address): Result<Unit> =
+        safeCall { employeeAddressConnector.saveEmployeeAddress(address.toEntity()) }
 
     override suspend fun deleteEmployee(employee: Employee): Result<Unit> =
         safeCall { employeeAddressConnector.deleteEmployee(employee.toEntities()) }
 
     override suspend fun deleteAddress(address: Address): Result<Unit> =
         safeCall { employeeAddressConnector.deleteAddress(address.toEntity()) }
+
+    override suspend fun updateEmployeeAddress(address: Address): Result<Unit> =
+        safeCall { employeeAddressConnector.updateAddress(address.toEntity()) }
 }

@@ -5,5 +5,14 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { EmployeeViewModel(getAllEmployeeUseCase = get(), saveEmployeeUseCase = get()) }
+    viewModel {
+        EmployeeViewModel(
+            getAllEmployeeUseCase = get(),
+            saveEmployeeUseCase = get(),
+            deleteAddressUseCase = get(),
+            deleteEmployeeUseCase = get(),
+            updateEmployeeAddressUseCase = get(),
+            saveEmployeeAddressUseCase = get()
+        )
+    }
 }

@@ -3,10 +3,12 @@ package com.example.app.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.app.R
-import com.example.app.domain.entity.Gender
-import com.example.app.ui.entity.AddressItem
-import com.example.app.ui.entity.EmployeeItem
+import com.example.app.ui.dialog.openAddEmployeeDialog
+import com.example.app.ui.dialog.openAddressEditDialog
+import com.example.app.ui.dialog.openEmployeeEditDialog
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,39 +17,50 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: EmployeeViewModel by viewModel()
     private val mainScope = MainScope()
+    private val employeeController =
+        EmployeeController(
+            onEmployeeRemove = { viewModel.deleteEmployee(it) },
+            onAddressRemove = { viewModel.deleteAddress(it) },
+            onEditAddress = { address ->
+                openAddressEditDialog(address) { updatedAddress ->
+                    viewModel.updateEmployeeAddress(
+                        updatedAddress
+                    )
+                }
+            },
+            onEditEmployee = {
+                openEmployeeEditDialog(it) { updatedEmployee ->
+                    viewModel.saveEmployee(updatedEmployee)
+                }
+            },
+            addEmployee = {
+                openAddEmployeeDialog { employee ->
+                    viewModel.saveEmployee(employee)
+                }
+            },
+            addAddress = { employee ->
+                openAddressEditDialog { updatedAddress ->
+                    viewModel.saveEmployeeAddress(updatedAddress.copy(employeeId = employee.employeeId))
+                }
+            }
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        employeeRecycler.setController(employeeController)
+
         mainScope.launch {
             viewModel.getEmployees().collect {
-                println(it)
+                employeeController.setData(it)
             }
         }
+    }
 
-        viewModel.saveEmployee(
-            EmployeeItem(
-                employeeId = 123,
-                firstName = "Tobiasz",
-                lastName = "Kansy",
-                age = 21,
-                gender = Gender.MALE,
-                addressItem = listOf(
-                    AddressItem(
-                        street = "Krzywa",
-                        city = "Kozlowice",
-                        employeeId = 123,
-                        homeNumber = 10
-                    ),
-                    AddressItem(
-                        street = "Kozlowice",
-                        city = "Dom",
-                        employeeId = 123,
-                        homeNumber = 12
-                    )
-                )
-            )
-        )
+    override fun onDestroy() {
+        super.onDestroy()
+
+        mainScope.cancel()
     }
 }
