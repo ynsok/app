@@ -13,7 +13,6 @@ class SaveEmployeeUseCaseTest {
     private val employeeRepository: EmployeeRepository = mockk(relaxed = true)
     private val employee: Employee = mockk(relaxed = true)
 
-
     @Before
     fun setup() {
         saveEmployeeUseCase = SaveEmployeeUseCase(employeeRepository)
@@ -24,6 +23,5 @@ class SaveEmployeeUseCaseTest {
         saveEmployeeUseCase.run(employee)
 
         coVerify { employeeRepository.saveEmployee(employee) }
-
     }
 }

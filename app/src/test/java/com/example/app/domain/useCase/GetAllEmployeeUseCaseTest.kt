@@ -28,7 +28,6 @@ class GetAllEmployeeUseCaseTest {
         getAllEmployeeUseCase.run()
 
         coVerify { employeeRepository.getAllEmployee() }
-
     }
 
     @Test
@@ -41,6 +40,5 @@ class GetAllEmployeeUseCaseTest {
             .collect()
 
         coVerify { employeeRepository.getAllEmployee() }
-
     }
 }

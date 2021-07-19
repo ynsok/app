@@ -18,7 +18,11 @@ class AddressEditDialog(
 ) : AlertDialog(context, themeResId) {
     override fun onCreate(savedInstanceState: Bundle?) {
         with(LayoutInflater.from(context).inflate(R.layout.address_dialog, null)) {
-            address?.let { setupViews(it) }
+            address?.let {
+                editText_home_number.setText(it.homeNumber.toString())
+                editText_city.setText(it.city)
+                editText_street.setText(it.street)
+            }
             save_button.setOnClickListener { saveButtonClick() }
             setView(this)
         }
@@ -39,12 +43,6 @@ class AddressEditDialog(
         }
     }
 
-    private fun setupViews(address: AddressItem) = with(address) {
-        editText_home_number.setText(homeNumber.toString())
-        editText_city.setText(city)
-        editText_street.setText(street)
-    }
-
     private fun isAnyFieldsEmpty(
         homeNumber: String,
         city: String,
@@ -56,7 +54,7 @@ class AddressEditDialog(
         onSaveButtonClick.invoke(
             address.copy(
                 homeNumber = editText_home_number.text.toString().toLong(),
-                city = editText_home_number.text.toString(),
+                city = editText_city.text.toString(),
                 street = editText_street.text.toString()
             )
         )

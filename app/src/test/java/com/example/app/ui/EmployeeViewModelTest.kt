@@ -1,7 +1,12 @@
 package com.example.app.ui
 
 import com.example.app.domain.entity.Employee
-import com.example.app.domain.useCase.*
+import com.example.app.domain.useCase.DeleteAddressUseCase
+import com.example.app.domain.useCase.DeleteEmployeeUseCase
+import com.example.app.domain.useCase.GetAllEmployeeUseCase
+import com.example.app.domain.useCase.SaveEmployeeAddressUseCase
+import com.example.app.domain.useCase.SaveEmployeeUseCase
+import com.example.app.domain.useCase.UpdateEmployeeAddressUseCase
 import com.example.app.ui.entity.AddressItem
 import com.example.app.ui.entity.EmployeeItem
 import io.mockk.coEvery
@@ -33,7 +38,6 @@ class EmployeeViewModelTest {
     private val employee: Employee = mockk(relaxed = true)
     private val employeeItem: EmployeeItem = mockk(relaxed = true)
     private val dispatcher = TestCoroutineDispatcher()
-
 
     @Before
     fun setup() {

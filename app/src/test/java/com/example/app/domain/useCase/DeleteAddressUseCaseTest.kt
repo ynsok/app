@@ -13,7 +13,6 @@ class DeleteAddressUseCaseTest {
     private val employeeRepository: EmployeeRepository = mockk(relaxed = true)
     private val address: Address = mockk(relaxed = true)
 
-
     @Before
     fun setup() {
         deleteAddressUseCase = DeleteAddressUseCase(employeeRepository)
@@ -24,6 +23,5 @@ class DeleteAddressUseCaseTest {
         deleteAddressUseCase.run(address)
 
         coVerify { employeeRepository.deleteEmployeeAddress(address) }
-
     }
 }

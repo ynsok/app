@@ -28,7 +28,6 @@ class EmployeeRepositoryImplTest {
         coVerify { employeeAddressConnector.updateAddress(address.toEntity()) }
     }
 
-
     @Test
     fun `when deleteEmployeeAddress is invoked then deleteEmployeeAddress is called`() =
         runBlocking {

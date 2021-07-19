@@ -23,6 +23,5 @@ class DeleteEmployeeUseCaseTest {
         deleteEmployeeUseCase.run(employee)
 
         coVerify { employeeRepository.deleteEmployee(employee) }
-
     }
 }
