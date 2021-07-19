@@ -30,5 +30,6 @@ class EmployeeAddressConnector(
 
     fun deleteEmployee(employee: EmployeeEntity) = employeeDao.deleteEmployee(employee)
 
-    fun deleteAddress(addressEntity: AddressEntity) = addressDao.deleteAddress(addressEntity)
+    fun deleteEmployeeAddress(addressEntity: AddressEntity) =
+        addressDao.deleteAddress(addressEntity)
 }

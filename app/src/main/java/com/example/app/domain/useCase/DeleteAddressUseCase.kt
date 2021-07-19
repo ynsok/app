@@ -5,5 +5,5 @@ import com.example.app.domain.repository.EmployeeRepository
 
 class DeleteAddressUseCase(private val employeeRepository: EmployeeRepository) {
 
-    suspend fun run(address: Address) = employeeRepository.deleteAddress(address)
+    suspend fun run(address: Address) = employeeRepository.deleteEmployeeAddress(address)
 }

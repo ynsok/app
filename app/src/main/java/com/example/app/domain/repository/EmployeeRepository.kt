@@ -10,6 +10,6 @@ interface EmployeeRepository {
     suspend fun saveEmployee(employee: Employee): Result<Unit>
     suspend fun saveEmployeeAddress(address: Address): Result<Unit>
     suspend fun deleteEmployee(employee: Employee): Result<Unit>
-    suspend fun deleteAddress(address: Address): Result<Unit>
+    suspend fun deleteEmployeeAddress(address: Address): Result<Unit>
     suspend fun updateEmployeeAddress(address: Address): Result<Unit>
 }
