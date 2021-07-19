@@ -1,4 +1,4 @@
-package com.example.app.ui.extenstion
+package com.example.app.ui.extensions
 
 import android.content.Context
 import android.widget.Toast

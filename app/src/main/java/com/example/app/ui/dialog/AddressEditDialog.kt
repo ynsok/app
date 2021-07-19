@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.app.R
 import com.example.app.ui.entity.AddressItem
-import com.example.app.ui.extenstion.showShortToast
+import com.example.app.ui.extensions.showShortToast
 import kotlinx.android.synthetic.main.address_dialog.*
 import kotlinx.android.synthetic.main.address_dialog.view.*
 

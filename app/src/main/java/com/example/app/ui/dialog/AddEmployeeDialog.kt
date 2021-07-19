@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.app.R
 import com.example.app.domain.entity.Gender
 import com.example.app.ui.entity.EmployeeItem
-import com.example.app.ui.extenstion.showShortToast
+import com.example.app.ui.extensions.showShortToast
 import kotlinx.android.synthetic.main.add_employee_dialog.*
 import kotlinx.android.synthetic.main.add_employee_dialog.view.*
 
