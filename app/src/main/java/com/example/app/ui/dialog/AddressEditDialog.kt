@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.app.R
 import com.example.app.ui.entity.AddressItem
+import com.example.app.ui.extenstion.showShortToast
 import kotlinx.android.synthetic.main.address_dialog.*
 import kotlinx.android.synthetic.main.address_dialog.view.*
 
@@ -18,28 +19,47 @@ class AddressEditDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         with(LayoutInflater.from(context).inflate(R.layout.address_dialog, null)) {
             address?.let { setupViews(it) }
-            save_button.setOnClickListener { onSaveButtonClick() }
+            save_button.setOnClickListener { saveButtonClick() }
             setView(this)
         }
 
         super.onCreate(savedInstanceState)
     }
 
-    private fun onSaveButtonClick() {
-        val address = address ?: AddressItem()
-        onSaveButtonClick.invoke(
-            address.copy(
-                homeNumber = editText_home_number.text.toString().toLong(),
-                city = editText_city.text.toString(),
-                street = editText_street.text.toString()
-            )
-        )
-        dismiss()
+    private fun saveButtonClick() {
+        val homeNumber = editText_home_number.text.toString()
+        val city = editText_home_number.text.toString()
+        val street = editText_street.text.toString()
+
+        if (isAnyFieldsEmpty(homeNumber, city, street)) {
+            context.showShortToast(R.string.fields_cant_be_empty)
+        } else {
+            invokeOnSaveButtonClick()
+            dismiss()
+        }
     }
 
     private fun setupViews(address: AddressItem) = with(address) {
         editText_home_number.setText(homeNumber.toString())
         editText_city.setText(city)
         editText_street.setText(street)
+    }
+
+    private fun isAnyFieldsEmpty(
+        homeNumber: String,
+        city: String,
+        street: String
+    ) = homeNumber.isEmpty() || city.isEmpty() || street.isEmpty()
+
+    private fun invokeOnSaveButtonClick() {
+        val address = address ?: AddressItem()
+        onSaveButtonClick.invoke(
+            address.copy(
+                homeNumber = editText_home_number.text.toString().toLong(),
+                city = editText_home_number.text.toString(),
+                street = editText_street.text.toString()
+            )
+        )
+        dismiss()
     }
 }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 
 class EmployeeRepositoryImpl(private val employeeAddressConnector: EmployeeAddressConnector) :
     EmployeeRepository {
-    override suspend fun getAllEmployee(): Flow<List<Employee>> =
+    override fun getAllEmployee(): Flow<List<Employee>> =
         employeeAddressConnector.employeeFlow().map { it.toDomains() }
 
     override suspend fun saveEmployee(employee: Employee): Result<Unit> =

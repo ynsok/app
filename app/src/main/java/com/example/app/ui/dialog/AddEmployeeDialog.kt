@@ -10,24 +10,23 @@ import com.example.app.domain.entity.Gender
 import com.example.app.ui.entity.EmployeeItem
 import com.example.app.ui.extenstion.showShortToast
 import kotlinx.android.synthetic.main.add_employee_dialog.*
-import kotlinx.android.synthetic.main.add_employee_dialog.view.save_button
-import kotlinx.android.synthetic.main.add_employee_dialog.view.spinner_gender
+import kotlinx.android.synthetic.main.add_employee_dialog.view.*
 
 class AddEmployeeDialog(
     context: Context,
     themeResId: Int,
-    private val onSaveButtonClick: (EmployeeItem) -> Unit
+    private val onSaveEditButtonClick: (EmployeeItem) -> Unit
 ) : AlertDialog(context, themeResId) {
     override fun onCreate(savedInstanceState: Bundle?) {
         with(LayoutInflater.from(context).inflate(R.layout.add_employee_dialog, null)) {
-            spinner_gender.adapter = getAdapter()
+            spinner_gender.adapter = getSpinnerAdapter()
             save_button.setOnClickListener { saveButtonClick() }
             setView(this)
         }
         super.onCreate(savedInstanceState)
     }
 
-    private fun getAdapter(): ArrayAdapter<String> {
+    private fun getSpinnerAdapter(): ArrayAdapter<String> {
         val genders = listOf(Gender.MALE.name, Gender.FEMALE.name)
         val adapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, genders)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -43,7 +42,7 @@ class AddEmployeeDialog(
         if (isAnyFieldsEmpty(employeeId, firstName, lastName, age)) {
             context.showShortToast(R.string.fields_cant_be_empty)
         } else {
-            invokeOnSaveButtonClick(employeeId.toLong())
+            invokeOnSaveEditButtonClick(employeeId.toLong())
             dismiss()
         }
     }
@@ -55,7 +54,7 @@ class AddEmployeeDialog(
         age: String
     ) = employeeId.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || age.isEmpty()
 
-    private fun invokeOnSaveButtonClick(employeeId: Long) = onSaveButtonClick.invoke(
+    private fun invokeOnSaveEditButtonClick(employeeId: Long) = onSaveEditButtonClick.invoke(
         EmployeeItem(
             employeeId = employeeId,
             firstName = editText_firstName.text.toString(),

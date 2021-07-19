@@ -12,7 +12,8 @@ class EmployeeAddressConnector(
     fun saveEmployee(employee: EmployeeEntity) =
         employeeDao.insertOrReplaceEmployee(employee)
 
-    fun saveEmployeeAddress(addressEntity: AddressEntity) = addressDao.insertOrUpdateAddress(addressEntity)
+    fun saveEmployeeAddress(addressEntity: AddressEntity) =
+        addressDao.insertOrUpdateAddress(addressEntity)
 
     fun updateAddress(addressEntity: AddressEntity) = addressDao.updateAddress(addressEntity)
 

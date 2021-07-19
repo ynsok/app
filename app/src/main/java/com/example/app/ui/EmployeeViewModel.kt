@@ -24,7 +24,7 @@ class EmployeeViewModel(
     private val saveEmployeeAddressUseCase: SaveEmployeeAddressUseCase
 ) : ViewModel() {
 
-    suspend fun getEmployees() = getAllEmployeeUseCase.run()
+    fun getEmployees() = getAllEmployeeUseCase.run()
         .map { employees ->
             employees
                 .map { employee ->

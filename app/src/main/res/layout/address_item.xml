@@ -5,12 +5,23 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/homeNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
     <TextView
         android:id="@+id/city"
@@ -29,14 +40,14 @@
         app:layout_constraintTop_toBottomOf="@+id/city" />
 
     <ImageView
-        android:id="@+id/close"
+        android:id="@+id/remove"
         android:layout_width="@dimen/image_size_30dp"
         android:layout_height="@dimen/image_size_30dp"
         android:layout_marginEnd="@dimen/margin_16dp"
         android:src="@drawable/ic_baseline_close_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/homeNumber" />
 
 
     <ImageView
@@ -46,6 +57,6 @@
         android:layout_marginEnd="@dimen/margin_16dp"
         android:src="@drawable/ic_baseline_edit_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/close"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/remove"
+        app:layout_constraintTop_toTopOf="@+id/homeNumber" />
 </androidx.constraintlayout.widget.ConstraintLayout>

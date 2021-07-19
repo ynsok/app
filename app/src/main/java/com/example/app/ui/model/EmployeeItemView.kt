@@ -20,7 +20,7 @@ class EmployeeItemView @JvmOverloads constructor(
     var onEditClick: (() -> Unit)? = null
         @CallbackProp set
 
-    var onCloseClick: (() -> Unit)? = null
+    var onRemoveClick: (() -> Unit)? = null
         @CallbackProp set
 
     var onAddAddress: (() -> Unit)? = null
@@ -30,15 +30,16 @@ class EmployeeItemView @JvmOverloads constructor(
         inflate(context, R.layout.employee_item, this)
 
         edit.setOnClickListener { onEditClick?.invoke() }
-        close.setOnClickListener { onCloseClick?.invoke() }
+        remove.setOnClickListener { onRemoveClick?.invoke() }
         addAddress.setOnClickListener { onAddAddress?.invoke() }
     }
 
     @ModelProp
     fun setEmployee(item: EmployeeItem) {
-        employeeName.text = "Name: ${item.firstName}"
-        lastName.text = "Last Name: ${item.lastName}"
-        age.text = "Age: ${item.age}"
-        gender.text = "Gender: ${item.gender}"
+        separator.text = context.getString(R.string.employee_item_employee) + item.employeeId
+        employeeName.text = context.getString(R.string.employee_item_name) + item.firstName
+        lastName.text = context.getString(R.string.employee_item_last_name) + item.lastName
+        age.text = context.getString(R.string.employee_item_age) + item.age
+        gender.text = context.getString(R.string.employee_item_gender) + item.gender
     }
 }

@@ -20,20 +20,25 @@ class AddressItemView @JvmOverloads constructor(
     var onEditClick: (() -> Unit)? = null
         @CallbackProp set
 
-    var onCloseClick: (() -> Unit)? = null
+    var onRemoveClick: (() -> Unit)? = null
         @CallbackProp set
 
     init {
         inflate(context, R.layout.address_item, this)
 
         edit.setOnClickListener { onEditClick?.invoke() }
-        close.setOnClickListener { onCloseClick?.invoke() }
+        remove.setOnClickListener { onRemoveClick?.invoke() }
     }
 
     @ModelProp
     fun setAddress(item: AddressItem) {
-        homeNumber.text = "Home Number: ${item.homeNumber}"
-        city.text = "City: ${item.city}"
-        street.text = "Street: ${item.street}"
+        homeNumber.text = context.getString(R.string.address_item_home_number) + item.homeNumber
+        city.text = context.getString(R.string.address_item_city) + item.city
+        street.text = context.getString(R.string.address_item_street) + item.street
+    }
+
+    @ModelProp
+    fun setAddressIndex(index: Int) {
+        separator.text = context.getString(R.string.address_item_address) + index
     }
 }

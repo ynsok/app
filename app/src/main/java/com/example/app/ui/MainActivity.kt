@@ -9,8 +9,8 @@ import com.example.app.ui.dialog.openEmployeeEditDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -51,11 +51,9 @@ class MainActivity : AppCompatActivity() {
 
         employeeRecycler.setController(employeeController)
 
-        mainScope.launch {
-            viewModel.getEmployees().collect {
-                employeeController.setData(it)
-            }
-        }
+        viewModel.getEmployees()
+            .onEach { employeeController.setData(it) }
+            .launchIn(mainScope)
     }
 
     override fun onDestroy() {
