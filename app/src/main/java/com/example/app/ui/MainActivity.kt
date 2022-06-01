@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * doc
+ * test check
  */
 
 class MainActivity : AppCompatActivity() {
