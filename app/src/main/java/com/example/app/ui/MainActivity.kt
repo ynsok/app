@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * doc
+ */
+
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: EmployeeViewModel by viewModel()
