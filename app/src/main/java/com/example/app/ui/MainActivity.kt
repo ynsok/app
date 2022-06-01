@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * test check
+ */
+
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: EmployeeViewModel by viewModel()
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             },
             addEmployee = {
                 openAddEmployeeDialog { employee ->
+
                     viewModel.saveEmployee(employee)
                 }
             },
