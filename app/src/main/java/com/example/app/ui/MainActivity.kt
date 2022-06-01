@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
             },
             addEmployee = {
                 openAddEmployeeDialog { employee ->
-                    viewModel.saveEmployee(employee)
+
+                                               viewModel.saveEmployee(employee)
                 }
             },
             addAddress = { employee ->
