@@ -183,8 +183,8 @@ class MainTest : TestCase() {
                 MainActivityScreen {
                     employeeRecycler.childAt<AddressItemView>(3) {
                         homeNumber.hasText("Home Number:123455453")
-                        city.hasText("City:Asdadd")
-                        street.hasText("Street:Asdasdadad")
+                        city.hasText("City:asdadd")
+                        street.hasText("Street:asdasdadad")
                     }
                 }
             }
@@ -226,7 +226,7 @@ class MainTest : TestCase() {
             step("check if first employee updated") {
                 MainActivityScreen.employeeRecycler.childAt<EmployeeItemView>(1) {
                     employeeName.hasText("Name:Tytus")
-                    lastName.hasText("Last Name:Name")
+                    lastName.hasText("Last Name:name")
                     age.hasText("Age:121312312323")
                 }
             }
