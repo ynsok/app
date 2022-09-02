@@ -16,8 +16,12 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // add
+        // add
 
-        initializeKoin()
+        // added Message
+        // initializeKoin()
+        // added
     }
 
     private fun initializeKoin() = startKoin {
